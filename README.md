@@ -7,7 +7,7 @@ It runs on the web browser, and also on the Raspberry PI using [angular2-iot](ht
 
 ## Running in a Web Browser
 
-  npm install
-  npm start
-  
+    npm install
+    npm start
+
 Then go to [http://localhost:3000](http://localhost:3000) in your browser.
