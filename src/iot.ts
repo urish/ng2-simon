@@ -1,8 +1,8 @@
-import 'angular2-universal-preview/polyfills';
+import 'angular2-universal/polyfills';
 import {bootstrap} from 'angular2-iot';
 import {SimonGame} from './app/simon/SimonGame';
 import {Board} from 'johnny-five';
-// import * as IO from 'raspi-io';
+// const IO = require('raspi-io');
 
 let board = new Board({
   // io: new IO()
