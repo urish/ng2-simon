@@ -11,7 +11,6 @@ export class SevenSegment implements OnChanges {
   ngOnChanges() {
     if (this.value !== null) {
       exec(`i2cset -y 1 0x71 0x76`);
-      console.log('on changes', this.value);
       for (let letter of this.value.toString().substr(0, 4)) {
         exec(`i2cset -y 1 0x71 ${letter}`);
       }
