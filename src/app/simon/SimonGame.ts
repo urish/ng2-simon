@@ -1,6 +1,25 @@
 import {Component} from 'angular2/core';
 import {SimonSegment} from './SimonSegment';
 import {SimonScore} from './SimonScore';
+import {AnalogSynth} from '../AnalogSynth';
+
+const SIMON_TONES = [
+  192,  /* G3 */
+  262,  /* C4 */
+  330,  /* E4 */
+  392   /* G4 */
+];
+
+const WIN_MELODY = [
+  330, /* E4 */
+  392, /* G4 */
+  659, /* E5 */
+  523, /* C5 */
+  587, /* D5 */
+  784  /* G5 */
+];
+
+const LOSE_TONE = 100;
 
 @Component({
   selector: 'simon-game',
@@ -20,7 +39,8 @@ import {SimonScore} from './SimonScore';
      <simon-score [score]="score"></simon-score>
   </div>
   `,
-  directives: [SimonScore, SimonSegment]
+  directives: [SimonScore, SimonSegment],
+  providers: [AnalogSynth]
 })
 export class SimonGame {
   private ledStates = [false, false, false, false];
@@ -29,7 +49,7 @@ export class SimonGame {
   private playerTurn: boolean;
   private score: number = 0;
 
-  constructor() {
+  constructor(private synth: AnalogSynth) {
     this.nextTurn();
   }
 
@@ -42,6 +62,7 @@ export class SimonGame {
   blink(ledIndex) {
     return new Promise(resolve => {
       this.ledStates[ledIndex] = true;
+      this.synth.playTone(SIMON_TONES[ledIndex], 300);
       setTimeout(() => {
         this.ledStates[ledIndex] = false;
         resolve();
@@ -73,8 +94,7 @@ export class SimonGame {
         this.sequenceIndex++;
         if (this.sequenceIndex === this.sequence.length) {
           this.playerTurn = false;
-          this.score++;
-          setTimeout(() => this.nextTurn(), 500);
+          this.nextRound();
         } else {
           this.playerTurn = true;
         }
@@ -82,10 +102,21 @@ export class SimonGame {
     }
   }
 
+  nextRound() {
+    this.score++;
+    let delay = 0;
+    for (let note of WIN_MELODY) {
+      this.synth.playTone(note, 150 + delay);
+      delay += 50;
+    }
+    setTimeout(() => this.nextTurn(), 500);
+  }
+
   gameOver() {
     console.log('Game Over!');
+    this.synth.playTone(LOSE_TONE, 500);
     this.sequence = [];
     this.score = 0;
-    setTimeout(() => this.nextTurn(), 500);
+    setTimeout(() => this.nextTurn(), 1300);
   }
 }
