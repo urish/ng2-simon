@@ -8,8 +8,6 @@ const helpers = require('./helpers');
 /*
  * Webpack Plugins
  */
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
 
 /*

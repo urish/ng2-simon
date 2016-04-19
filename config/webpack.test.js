@@ -3,12 +3,15 @@
  */
 
 const helpers = require('./helpers');
+const webpack = require('webpack');
 
 /**
  * Webpack Plugins
  */
 const ProvidePlugin = require('webpack/lib/ProvidePlugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 /**
  * Webpack Constants
