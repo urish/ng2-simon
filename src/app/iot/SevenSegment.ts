@@ -1,5 +1,7 @@
 import {Component, Input, OnChanges} from 'angular2/core';
-import {exec} from 'child_process';
+const {Board} = require('johnny-five');
+
+const SEVEN_SEGMENT_ADDRESS = 0x71;
 
 @Component({
   'selector': 'iot-sevensegment',
@@ -7,13 +9,17 @@ import {exec} from 'child_process';
 })
 export class SevenSegment implements OnChanges {
   @Input() value: string | number = null;
+  private io; // initialized by Board.Component
+
+  constructor() {
+    Board.Component.call(this, {});
+    this.io.i2cConfig({});
+  }
 
   ngOnChanges() {
     if (this.value !== null) {
-      exec(`i2cset -y 1 0x71 0x76`);
-      for (let letter of this.value.toString().substr(0, 4)) {
-        exec(`i2cset -y 1 0x71 ${letter}`);
-      }
+      const chars = this.value.toString().substr(0, 4).split('').map(letter => letter.charCodeAt(0));
+      this.io.i2cWrite(SEVEN_SEGMENT_ADDRESS, [0x76, ...chars]);
     }
   }
 }
