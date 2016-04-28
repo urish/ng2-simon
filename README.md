@@ -39,5 +39,7 @@ TBD
 
 Run the following command on the Raspberry pi terminal / console:
 
-1. Build the project using `npm run build:iot`
-2. Run it using `sudo npm run iot`
+1. Install the `raspi-io` package by running `npm install raspi-io`
+2. Make sure you have the `sox` package installed: `sudo apt-get install sox`
+3. Build the project using `npm run build:iot`
+4. Run it using `sudo npm run iot`
