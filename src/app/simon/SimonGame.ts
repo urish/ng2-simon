@@ -10,15 +10,6 @@ const SIMON_TONES = [
   392   /* G4 */
 ];
 
-const WIN_MELODY = [
-  330, /* E4 */
-  392, /* G4 */
-  659, /* E5 */
-  523, /* C5 */
-  587, /* D5 */
-  784  /* G5 */
-];
-
 @Component({
   selector: 'simon-game',
   template: `
@@ -113,12 +104,9 @@ export class SimonGame {
 
   nextRound() {
     this.score++;
-    let delay = 0;
-    for (let note of WIN_MELODY) {
-      this.synth.playTone(note, 150 + delay);
-      delay += 50;
-    }
-    setTimeout(() => this.nextTurn(), 500);
+    this.synth.playSound('assets/sound/levelup.mp3').then(() => {
+      setTimeout(() => this.nextTurn(), 200);
+    });
   }
 
   gameOver() {
