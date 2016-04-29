@@ -18,7 +18,7 @@ import {SimonGame} from './simon/SimonGame';
   styles: [`
     body {
       margin: 0;
-      background: #333;
+      background: black;
       color: #ddd;
       font-size: 24px;
       text-align: center;

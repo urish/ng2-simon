@@ -36,11 +36,11 @@ import {Component, Input} from 'angular2/core';
     }
 
     span.background {
-      color: #300;
+      color: #0d1419;
     }
 
     span.content {
-      color: red;
+      color: #517b96;
     }
   `
   ]

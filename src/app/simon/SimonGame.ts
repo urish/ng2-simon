@@ -23,20 +23,31 @@ const WIN_MELODY = [
   selector: 'simon-game',
   template: `
   <div>
-    <div>
+    <simon-score [score]="score"></simon-score>
+
+    <div class="simon-row">
       <simon-segment color="green"  (click)="button(0)" [state]="ledStates[0]">
       </simon-segment>
       <simon-segment color="red"    (click)="button(1)" [state]="ledStates[1]">
       </simon-segment>
-      <simon-segment color="yellow" (click)="button(2)" [state]="ledStates[2]">
-      </simon-segment>
+    </div>
+    <div class="simon-row">
       <simon-segment color="blue"   (click)="button(3)" [state]="ledStates[3]">
       </simon-segment>
+      <simon-segment color="yellow" (click)="button(2)" [state]="ledStates[2]">
+      </simon-segment>
     </div>
-
-     <simon-score [score]="score"></simon-score>
   </div>
   `,
+  styles: [`
+    .simon-row {
+      margin-bottom: 1pc;
+    }
+
+    simon-segment {
+      margin-right: 0.5pc;
+    }
+  `],
   directives: [SimonScore, SimonSegment],
   providers: [AnalogSynth]
 })
