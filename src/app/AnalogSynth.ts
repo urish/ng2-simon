@@ -22,4 +22,13 @@ export class AnalogSynth {
       osc.stop(this.context.currentTime + durationMs / 1000.);
     }
   }
+
+  public playSound(path): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const soundFile = new Audio(path);
+      soundFile.play();
+      soundFile.onended = resolve;
+      soundFile.onerror = reject;
+    });
+  }
 }

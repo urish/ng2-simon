@@ -19,8 +19,6 @@ const WIN_MELODY = [
   784  /* G5 */
 ];
 
-const LOSE_TONE = 100;
-
 @Component({
   selector: 'simon-game',
   template: `
@@ -114,9 +112,10 @@ export class SimonGame {
 
   gameOver() {
     console.log('Game Over!');
-    this.synth.playTone(LOSE_TONE, 500);
-    this.sequence = [];
-    this.score = 0;
-    setTimeout(() => this.nextTurn(), 1300);
+    this.synth.playSound('assets/sound/gameover.mp3').then(() => {
+      this.sequence = [];
+      this.score = 0;
+      setTimeout(() => this.nextTurn(), 500);
+    });
   }
 }
