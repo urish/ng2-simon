@@ -5,7 +5,8 @@ import {Board} from 'johnny-five';
 // const IO = require('raspi-io');
 
 let board = new Board({
-  // io: new IO()
+  // io: new IO(),
+  repl: false
 });
 
 board.on('ready', function() {
