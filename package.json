@@ -1,9 +1,9 @@
 {
-  "name": "angular2-webpack-starter",
-  "version": "5.0.4",
-  "description": "An Angular 2 Webpack Starter kit featuring Angular 2 (Router, Http, Forms, Services, Tests, E2E, Coverage), Karma, Protractor, Jasmine, Istanbul, TypeScript, and Webpack by AngularClass",
-  "author": "Patrick Stapleton <patrick@angularclass.com>",
-  "homepage": "https://github.com/angularclass/angular2-webpack-starter",
+  "name": "ng2-simon",
+  "version": "0.1.0",
+  "description": "Angular2 Simon Game",
+  "author": "Uri Shaked",
+  "homepage": "https://urish.github.io/ng2-simon/",
   "license": "MIT",
   "scripts": {
     "rimraf": "rimraf",
@@ -128,10 +128,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/angularclass/angular2-webpack-starter.git"
+    "url": "https://github.com/urish/ng2-simon.git"
   },
   "bugs": {
-    "url": "https://github.com/angularclass/angular2-webpack-starter/issues"
+    "url": "https://github.com/urish/ng2-simon/issues"
   },
   "engines": {
     "node": ">= 4.2.1",
