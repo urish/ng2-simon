@@ -1,12 +1,10 @@
 import {Injectable} from 'angular2/core';
 import {exec} from 'child_process';
+import {AnalogSynth} from '../AnalogSynth';
 const player = require('play-sound')({ player: 'mpg123' });
 
 @Injectable()
-export class AnalogSynth {
-
-  constructor() {
-  }
+export class LinuxAnalogSynth extends AnalogSynth {
 
   public playTone(frequency: number, durationMs: number) {
     exec(`play -n -c1 synth ${durationMs / 1000.} sawtooth ${frequency}`);

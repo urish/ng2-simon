@@ -39,8 +39,7 @@ const SIMON_TONES = [
       margin-right: 0.5pc;
     }
   `],
-  directives: [SimonScore, SimonSegment],
-  providers: [AnalogSynth]
+  directives: [SimonScore, SimonSegment]
 })
 export class SimonGame {
   private ledStates = [false, false, false, false];
