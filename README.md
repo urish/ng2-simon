@@ -32,7 +32,7 @@ Then go to [http://localhost:3000](http://localhost:3000) in your browser.
 3. Build the project using `npm run build:iot`
 4. Run it using `npm run iot`
 
-## Running on Raspiberry Pi
+## Running on Raspberry Pi
 
 ### Hardware Assembly
 
