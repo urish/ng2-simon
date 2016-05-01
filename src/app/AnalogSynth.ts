@@ -23,7 +23,7 @@ export class AnalogSynth {
     }
   }
 
-  public playSound(path): Promise<any> {
+  public playSound(path: string): Promise<any> {
     return new Promise((resolve, reject) => {
       const soundFile = new Audio(path);
       soundFile.play();
