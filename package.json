@@ -106,7 +106,6 @@
     "nodemon": "^1.9.1",
     "parse5": "^2.1.5",
     "phantomjs-polyfill": "0.0.2",
-    "phantomjs-prebuilt": "^2.1.7",
     "protractor": "^3.2.2",
     "raw-loader": "0.5.1",
     "remap-istanbul": "^0.5.1",
@@ -125,6 +124,10 @@
     "webpack-dev-server": "^1.14.1",
     "webpack-md5-hash": "^0.0.5",
     "webpack-merge": "^0.8.4"
+  },
+  "optionalDependencies": {
+    "phantomjs-prebuilt": "2.1.7",
+    "raspi-io": "6.0.1"
   },
   "repository": {
     "type": "git",
