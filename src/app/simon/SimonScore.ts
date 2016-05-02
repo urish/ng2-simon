@@ -4,6 +4,8 @@ import {Component, Input} from 'angular2/core';
   selector: 'simon-score',
   template: `
     <div>
+      <iot-sevensegment [value]="zeroPad(score, 4)"></iot-sevensegment>
+
       <span class="container">
         8888
         <span class="background">8888</span>
