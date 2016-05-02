@@ -1,6 +1,7 @@
 import {Component} from 'angular2/core';
 import {SimonSegment} from './SimonSegment';
 import {SimonScore} from './SimonScore';
+import {SimonBlink} from './SimonBlink';
 import {AnalogSynth} from '../AnalogSynth';
 
 const SIMON_TONES = [
@@ -14,7 +15,7 @@ const SIMON_TONES = [
   selector: 'simon-game',
   template: `
   <div>
-    <simon-score [score]="score"></simon-score>
+    <simon-score [score]="playing ? score : 'PLAY'"></simon-score>
 
     <div class="simon-row">
       <simon-segment color="green"  (click)="button(0)" [state]="ledStates[0]">
@@ -28,6 +29,9 @@ const SIMON_TONES = [
       <simon-segment color="yellow" (click)="button(2)" [state]="ledStates[2]">
       </simon-segment>
     </div>
+    <simon-blink *ngIf="!playing">
+      Click any color to start...
+    </simon-blink>
   </div>
   `,
   styles: [`
@@ -38,18 +42,23 @@ const SIMON_TONES = [
     simon-segment {
       margin-right: 0.5pc;
     }
+
+    simon-blink {
+      margin-top: 3pc;
+      font-family: monospace;
+    }
   `],
-  directives: [SimonScore, SimonSegment]
+  directives: [SimonScore, SimonSegment, SimonBlink]
 })
 export class SimonGame {
   private ledStates = [false, false, false, false];
   private sequence: number[] = [];
   private sequenceIndex: number;
   private playerTurn: boolean;
+  private playing: boolean = false;
   private score: number = 0;
 
   constructor(private synth: AnalogSynth) {
-    this.nextTurn();
   }
 
   nextTurn() {
@@ -83,6 +92,11 @@ export class SimonGame {
   }
 
   button(idx) {
+    if (!this.playing) {
+      this.playing = true;
+      setTimeout(() => this.nextTurn(), 300);
+      return;
+    }
     if (this.playerTurn) {
       this.playerTurn = false;
       this.blink(idx).then(() => {
@@ -113,7 +127,7 @@ export class SimonGame {
     this.synth.playSound('assets/sound/gameover.mp3').then(() => {
       this.sequence = [];
       this.score = 0;
-      setTimeout(() => this.nextTurn(), 500);
+      this.playing = false;
     });
   }
 }
