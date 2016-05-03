@@ -8,11 +8,11 @@ import {SevenSegment} from './app/iot/SevenSegment';
 
 import {SimonGame} from './app/simon/SimonGame';
 
-import {Board} from 'johnny-five';
-// const IO = require('raspi-io');
+const {Board} = require('johnny-five');
+const IO = require('raspi-io');
 
 let board = new Board({
-  // io: new IO(),
+  io: new IO(),
   repl: false
 });
 
