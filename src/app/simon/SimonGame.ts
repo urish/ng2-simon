@@ -3,6 +3,7 @@ import {SimonSegment} from './SimonSegment';
 import {SimonScore} from './SimonScore';
 import {SimonBlink} from './SimonBlink';
 import {AnalogSynth} from '../AnalogSynth';
+import * as Firebase from 'firebase';
 
 const SIMON_TONES = [
   192,  /* G3 */
@@ -57,14 +58,30 @@ export class SimonGame {
   private playerTurn: boolean;
   private playing: boolean = false;
   private score: number = 0;
+  private gameStartTime: Date;
+  private fbRef: Firebase;
 
   constructor(private synth: AnalogSynth) {
+    this.fbRef = new Firebase('https://ngconf-simon.firebaseio.com');
+  }
+
+  startGame() {
+    this.gameStartTime = new Date();
+    this.nextTurn();
+  }
+
+  updateFirebase() {
+    this.fbRef.child('gameState').set({
+      playing: this.playing,
+      score: this.score
+    });
   }
 
   nextTurn() {
     this.sequence.push(Math.floor(Math.random() * 4));
     this.sequenceIndex = 0;
     this.playSequence();
+    this.updateFirebase();
   }
 
   blink(ledIndex) {
@@ -94,7 +111,7 @@ export class SimonGame {
   button(idx) {
     if (!this.playing) {
       this.playing = true;
-      setTimeout(() => this.nextTurn(), 300);
+      setTimeout(() => this.startGame(), 300);
       return;
     }
     if (this.playerTurn) {
@@ -124,10 +141,16 @@ export class SimonGame {
 
   gameOver() {
     console.log('Game Over!');
+    this.fbRef.child('games').push({
+      date: Firebase.ServerValue.TIMESTAMP,
+      score: this.score,
+      playingTime: (new Date().getTime() - this.gameStartTime.getTime()) / 1000.0
+    });
     this.synth.playSound('assets/sound/gameover.mp3').then(() => {
       this.sequence = [];
       this.score = 0;
       this.playing = false;
+      this.updateFirebase();
     });
   }
 }
