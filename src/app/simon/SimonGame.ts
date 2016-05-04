@@ -23,15 +23,15 @@ const TONE_DURATION_DELTA: number = 10;
     <simon-score [score]="playing ? score : 'PLAY'"></simon-score>
 
     <div class="simon-row">
-      <simon-segment color="green"  (click)="button(0)" [state]="ledStates[0]">
+      <simon-segment color="green"  (click)="button(0, 'green')" [state]="ledStates[0]">
       </simon-segment>
-      <simon-segment color="red"    (click)="button(1)" [state]="ledStates[1]">
+      <simon-segment color="red"    (click)="button(1, 'red')" [state]="ledStates[1]">
       </simon-segment>
     </div>
     <div class="simon-row">
-      <simon-segment color="blue"   (click)="button(3)" [state]="ledStates[3]">
+      <simon-segment color="blue"   (click)="button(3, 'blue')" [state]="ledStates[3]">
       </simon-segment>
-      <simon-segment color="yellow" (click)="button(2)" [state]="ledStates[2]">
+      <simon-segment color="yellow" (click)="button(2, 'yellow')" [state]="ledStates[2]">
       </simon-segment>
     </div>
     <simon-blink *ngIf="!playing">
@@ -56,15 +56,52 @@ const TONE_DURATION_DELTA: number = 10;
   directives: [SimonScore, SimonSegment, SimonBlink]
 })
 export class SimonGame {
+  /**
+   * Controls the states of each of the 4 buttons: on/off
+   */
   private ledStates = [false, false, false, false];
-  private sequence: number[] = [];
-  private sequenceIndex: number;
-  private playerTurn: boolean;
-  private playing: boolean = false;
-  private score: number = 0;
-  private gameStartTime: Date;
-  private fbRef: Firebase;
 
+  /**
+   * The sequence that the user has to repeat. Grows by one element
+   * every turn.
+   */
+  private sequence: number[] = [];
+
+  /**
+   * Keeps track of the current user position in the sequence
+   */
+  private sequenceIndex: number;
+
+  /**
+   * Determines whether we are currently playing the sequence or waiting for user to repeat it
+   */
+  private playerTurn: boolean;
+
+  /**
+   * Indicates whether the game is currently active
+   */
+  private playing: boolean = false;
+
+  /**
+   * Current score of the player
+   */
+  private score: number = 0;
+
+  /**
+   * Keeps track of the time when the game started
+   */
+  private gameStartTime: Date;
+
+  /**
+   * Contains the color chosen at the beginning of the game:
+   * 'red', 'green', 'blue' or 'yellow'
+   */
+  private gameColor: string;
+
+  /**
+   * A reference to Firebase, where we will store the game state and score
+   */
+  private fbRef: Firebase;
 
   constructor(private synth: AnalogSynth) {
     this.fbRef = new Firebase('https://ngconf-simon.firebaseio.com');
@@ -78,7 +115,8 @@ export class SimonGame {
   updateFirebase() {
     this.fbRef.child('gameState').set({
       playing: this.playing,
-      score: this.score
+      score: this.score,
+      color: this.gameColor
     });
   }
 
@@ -114,9 +152,10 @@ export class SimonGame {
     }
   }
 
-  button(idx) {
+  button(idx: number, color: string) {
     if (!this.playing) {
       this.playing = true;
+      this.gameColor = color;
       setTimeout(() => this.startGame(), 300);
       return;
     }
@@ -150,6 +189,7 @@ export class SimonGame {
     this.fbRef.child('games').push({
       date: Firebase.ServerValue.TIMESTAMP,
       score: this.score,
+      color: this.gameColor,
       playingTime: (new Date().getTime() - this.gameStartTime.getTime()) / 1000.0
     });
     this.synth.playSound('assets/sound/gameover.mp3').then(() => {
