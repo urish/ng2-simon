@@ -12,6 +12,10 @@ const SIMON_TONES = [
   392   /* G4 */
 ];
 
+const MAX_TONE_DURATION: number = 300;
+const MIN_TONE_DURATION: number = 100;
+const TONE_DURATION_DELTA: number = 10;
+
 @Component({
   selector: 'simon-game',
   template: `
@@ -61,6 +65,7 @@ export class SimonGame {
   private gameStartTime: Date;
   private fbRef: Firebase;
 
+
   constructor(private synth: AnalogSynth) {
     this.fbRef = new Firebase('https://ngconf-simon.firebaseio.com');
   }
@@ -87,11 +92,12 @@ export class SimonGame {
   blink(ledIndex) {
     return new Promise(resolve => {
       this.ledStates[ledIndex] = true;
-      this.synth.playTone(SIMON_TONES[ledIndex], 300);
+      const duration = Math.max(MAX_TONE_DURATION - this.score * TONE_DURATION_DELTA, MIN_TONE_DURATION);
+      this.synth.playTone(SIMON_TONES[ledIndex], duration);
       setTimeout(() => {
         this.ledStates[ledIndex] = false;
         resolve();
-      }, 300);
+      }, duration);
     });
   }
 
