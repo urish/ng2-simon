@@ -2,15 +2,24 @@ import 'angular2-universal/polyfills';
 import {provide, PLATFORM_DIRECTIVES} from 'angular2/core';
 import {bootstrap} from 'angular2-iot';
 
+import * as Firebase from 'firebase';
+const FirebaseTokenGenerator = require('firebase-token-generator');
+
 import {AnalogSynth} from './app/AnalogSynth';
 import {LinuxAnalogSynth} from './app/iot/LinuxAnalogSynth';
 import {SevenSegment} from './app/iot/SevenSegment';
-import {FirebasePrefix} from './app/model/tokens';
+import {FirebasePrefix, FirebaseAuthToken} from './app/model/tokens';
 
 import {SimonGame} from './app/simon/SimonGame';
 
 const {Board} = require('johnny-five');
 const IO = require('raspi-io');
+
+let firebaseToken = null;
+if (process.env.FIREBASE_SECRET) {
+  const tokenGenerator = new FirebaseTokenGenerator(process.env.FIREBASE_SECRET);
+  firebaseToken = tokenGenerator.createToken({ uid: 'iot' }, { admin: true });
+}
 
 let board = new Board({
   io: new IO(),
@@ -22,6 +31,7 @@ board.on('ready', function () {
   bootstrap(SimonGame, [
     provide(AnalogSynth, { useClass: LinuxAnalogSynth }),
     provide(PLATFORM_DIRECTIVES, { useValue: SevenSegment, multi: true }),
-    provide(FirebasePrefix, {useValue: '/iot'})
+    provide(FirebasePrefix, { useValue: '/iot' }),
+    provide(FirebaseAuthToken, { useValue: firebaseToken })
   ]);
 });

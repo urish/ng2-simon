@@ -62,6 +62,7 @@
     "angular2-universal": "0.98.3",
     "core-js": "^2.2.2",
     "firebase": "^2.4.2",
+    "firebase-token-generator": "^2.0.0",
     "johnny-five": "^0.9.35",
     "parse5": "^1.5.0",
     "play-sound": "0.0.9",

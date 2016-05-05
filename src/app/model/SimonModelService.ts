@@ -1,5 +1,5 @@
-import {Injectable, Inject} from 'angular2/core';
-import {FirebasePrefix} from './tokens';
+import {Injectable, Inject, Optional} from 'angular2/core';
+import {FirebasePrefix, FirebaseAuthToken} from './tokens';
 
 import * as Firebase from 'firebase';
 
@@ -10,8 +10,11 @@ export class SimonModelService {
    */
   private fbRef: Firebase;
 
-  constructor( @Inject(FirebasePrefix) prefix: string) {
+  constructor( @Inject(FirebasePrefix) prefix: string, @Inject(FirebaseAuthToken) @Optional() token: string) {
     this.fbRef = new Firebase('https://ngconf-simon.firebaseio.com').child(prefix);
+    if (token) {
+      this.fbRef.authWithCustomToken(token, (err, authData) => {});
+    }
   }
 
   updateGame(gameInfo: ISimonGameInfo) {
