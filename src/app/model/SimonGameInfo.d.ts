@@ -3,6 +3,7 @@ interface ISimonGameInfo {
   score: number;
   gameColor: string;
   lastColor: string;
+  sequenceIndex: number;
 }
 
 interface ISimonScoreInfo {

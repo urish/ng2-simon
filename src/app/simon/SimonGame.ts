@@ -199,7 +199,8 @@ export class SimonGame {
       score: this.score,
       playing: this.playing,
       gameColor: this.gameColor,
-      lastColor: this.lastColor
+      lastColor: this.lastColor,
+      sequenceIndex: this.sequenceIndex
     });
   }
 }
