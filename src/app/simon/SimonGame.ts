@@ -3,7 +3,7 @@ import {SimonSegment} from './SimonSegment';
 import {SimonScore} from './SimonScore';
 import {SimonBlink} from './SimonBlink';
 import {AnalogSynth} from '../AnalogSynth';
-import * as Firebase from 'firebase';
+import {SimonModelService} from '../model/SimonModelService';
 
 const SIMON_TONES = [
   192,  /* G3 */
@@ -53,7 +53,8 @@ const TONE_DURATION_DELTA: number = 10;
       font-family: monospace;
     }
   `],
-  directives: [SimonScore, SimonSegment, SimonBlink]
+  directives: [SimonScore, SimonSegment, SimonBlink],
+  providers: [SimonModelService]
 })
 export class SimonGame {
   /**
@@ -80,12 +81,12 @@ export class SimonGame {
   /**
    * Indicates whether the game is currently active
    */
-  private playing: boolean = false;
+  public playing: boolean = false;
 
   /**
    * Current score of the player
    */
-  private score: number = 0;
+  public score: number = 0;
 
   /**
    * Keeps track of the time when the game started
@@ -96,15 +97,9 @@ export class SimonGame {
    * Contains the color chosen at the beginning of the game:
    * 'red', 'green', 'blue' or 'yellow'
    */
-  private gameColor: string;
+  public gameColor: string;
 
-  /**
-   * A reference to Firebase, where we will store the game state and score
-   */
-  private fbRef: Firebase;
-
-  constructor(private synth: AnalogSynth) {
-    this.fbRef = new Firebase('https://ngconf-simon.firebaseio.com');
+  constructor(private synth: AnalogSynth, private simonModel: SimonModelService) {
   }
 
   startGame() {
@@ -112,19 +107,11 @@ export class SimonGame {
     this.nextTurn();
   }
 
-  updateFirebase() {
-    this.fbRef.child('gameState').set({
-      playing: this.playing,
-      score: this.score,
-      color: this.gameColor
-    });
-  }
-
   nextTurn() {
     this.sequence.push(Math.floor(Math.random() * 4));
     this.sequenceIndex = 0;
     this.playSequence();
-    this.updateFirebase();
+    this.updateModel();
   }
 
   blink(ledIndex) {
@@ -186,8 +173,7 @@ export class SimonGame {
 
   gameOver() {
     console.log('Game Over!');
-    this.fbRef.child('games').push({
-      date: Firebase.ServerValue.TIMESTAMP,
+    this.simonModel.publishScore({
       score: this.score,
       color: this.gameColor,
       playingTime: (new Date().getTime() - this.gameStartTime.getTime()) / 1000.0
@@ -196,7 +182,15 @@ export class SimonGame {
       this.sequence = [];
       this.score = 0;
       this.playing = false;
-      this.updateFirebase();
+      this.updateModel();
+    });
+  }
+
+  private updateModel() {
+    this.simonModel.updateGame({
+      score: this.score,
+      playing: this.playing,
+      gameColor: this.gameColor
     });
   }
 }
