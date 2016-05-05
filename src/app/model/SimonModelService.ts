@@ -1,4 +1,5 @@
-import {Injectable} from 'angular2/core';
+import {Injectable, Inject} from 'angular2/core';
+import {FirebasePrefix} from './tokens';
 
 import * as Firebase from 'firebase';
 
@@ -9,8 +10,8 @@ export class SimonModelService {
    */
   private fbRef: Firebase;
 
-  constructor() {
-    this.fbRef = new Firebase('https://ngconf-simon.firebaseio.com');
+  constructor( @Inject(FirebasePrefix) prefix: string) {
+    this.fbRef = new Firebase('https://ngconf-simon.firebaseio.com').child(prefix);
   }
 
   updateGame(gameInfo: ISimonGameInfo) {
