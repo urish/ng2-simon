@@ -181,6 +181,7 @@ export class SimonGame {
 
   gameOver() {
     console.log('Game Over!');
+    this.updateModel(true);
     this.simonModel.publishScore({
       score: this.score,
       color: this.gameColor,
@@ -194,13 +195,14 @@ export class SimonGame {
     });
   }
 
-  private updateModel() {
+  private updateModel(gameOver: boolean = false) {
     this.simonModel.updateGame({
       score: this.score,
       playing: this.playing,
       gameColor: this.gameColor,
       lastColor: this.lastColor,
-      sequenceIndex: this.sequenceIndex
+      sequenceIndex: this.sequenceIndex,
+      gameOver: gameOver
     });
   }
 }

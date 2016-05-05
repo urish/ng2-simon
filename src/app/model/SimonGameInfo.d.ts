@@ -4,6 +4,7 @@ interface ISimonGameInfo {
   gameColor: string;
   lastColor: string;
   sequenceIndex: number;
+  gameOver: boolean;
 }
 
 interface ISimonScoreInfo {
