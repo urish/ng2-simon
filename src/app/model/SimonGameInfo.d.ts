@@ -2,6 +2,7 @@ interface ISimonGameInfo {
   playing: boolean;
   score: number;
   gameColor: string;
+  lastColor: string;
 }
 
 interface ISimonScoreInfo {

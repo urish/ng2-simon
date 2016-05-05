@@ -81,12 +81,12 @@ export class SimonGame {
   /**
    * Indicates whether the game is currently active
    */
-  public playing: boolean = false;
+  private playing: boolean = false;
 
   /**
    * Current score of the player
    */
-  public score: number = 0;
+  private score: number = 0;
 
   /**
    * Keeps track of the time when the game started
@@ -97,7 +97,12 @@ export class SimonGame {
    * Contains the color chosen at the beginning of the game:
    * 'red', 'green', 'blue' or 'yellow'
    */
-  public gameColor: string;
+  private gameColor: string;
+
+  /**
+   * Contains the color of the last button that was pressed (used for syncing to firebase)
+   */
+  private lastColor: string;
 
   constructor(private synth: AnalogSynth, private simonModel: SimonModelService) {
   }
@@ -143,11 +148,14 @@ export class SimonGame {
     if (!this.playing) {
       this.playing = true;
       this.gameColor = color;
+      this.lastColor = color;
       setTimeout(() => this.startGame(), 300);
       return;
     }
     if (this.playerTurn) {
       this.playerTurn = false;
+      this.lastColor = color;
+      this.updateModel();
       this.blink(idx).then(() => {
         if (idx !== this.sequence[this.sequenceIndex]) {
           this.gameOver();
@@ -190,7 +198,8 @@ export class SimonGame {
     this.simonModel.updateGame({
       score: this.score,
       playing: this.playing,
-      gameColor: this.gameColor
+      gameColor: this.gameColor,
+      lastColor: this.lastColor
     });
   }
 }
