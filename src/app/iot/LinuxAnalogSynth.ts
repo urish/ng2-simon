@@ -1,4 +1,4 @@
-import {Injectable} from 'angular2/core';
+import {Injectable} from '@angular/core';
 import {exec} from 'child_process';
 import {AnalogSynth} from '../AnalogSynth';
 const player = require('play-sound')({ player: 'mpg123' });

@@ -1,5 +1,5 @@
 import 'angular2-universal/polyfills';
-import {provide, PLATFORM_DIRECTIVES} from 'angular2/core';
+import {provide, PLATFORM_DIRECTIVES} from '@angular/core';
 import {bootstrap} from 'angular2-iot';
 
 import * as Firebase from 'firebase';

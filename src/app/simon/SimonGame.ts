@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core';
+import {Component} from '@angular/core';
 import {SimonSegment} from './SimonSegment';
 import {SimonScore} from './SimonScore';
 import {SimonBlink} from './SimonBlink';

@@ -1,11 +1,10 @@
-import {Component, Input, Output, EventEmitter} from 'angular2/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'simon-segment',
   template: `
     <iot-led [pin]="LEDS[color]" [state]="state"></iot-led>
     <iot-button [pin]="BUTTONS[color]" (click)="click.emit()"></iot-button>
-
     <button [style.borderColor]="color" [style.background]="state?color:''"
             [class.active]="state" (click)="click.emit()">
     </button>
@@ -18,6 +17,10 @@ import {Component, Input, Output, EventEmitter} from 'angular2/core';
       background: transparent;
       border: black 5px solid;
       border-radius: 50px;
+    }
+
+    button:not(.active) {
+      background: transparent !important;
     }
 
     button:hover {

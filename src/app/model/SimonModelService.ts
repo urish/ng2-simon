@@ -1,4 +1,4 @@
-import {Injectable, Inject, Optional} from 'angular2/core';
+import {Injectable, Inject, Optional} from '@angular/core';
 import {FirebasePrefix, FirebaseAuthToken} from './tokens';
 
 import * as Firebase from 'firebase';

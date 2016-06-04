@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges} from 'angular2/core';
+import {Component, Input, OnChanges} from '@angular/core';
 const {Board} = require('johnny-five');
 
 const SEVEN_SEGMENT_ADDRESS = 0x71;

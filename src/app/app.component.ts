@@ -1,7 +1,7 @@
 /*
  * Angular 2 decorators and services
  */
-import {Component, ViewEncapsulation} from 'angular2/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 
 import {SimonGame} from './simon/SimonGame';
 
@@ -11,8 +11,6 @@ import {SimonGame} from './simon/SimonGame';
  */
 @Component({
   selector: 'app',
-  pipes: [],
-  providers: [],
   directives: [SimonGame],
   encapsulation: ViewEncapsulation.None,
   styles: [`

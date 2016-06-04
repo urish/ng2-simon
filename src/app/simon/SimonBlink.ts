@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from 'angular2/core';
+import {Component, OnDestroy} from '@angular/core';
 
 @Component({
   selector: 'simon-blink',
