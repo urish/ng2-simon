@@ -10,7 +10,7 @@ import {LinuxAnalogSynth} from './app/iot/LinuxAnalogSynth';
 import {SevenSegment} from './app/iot/SevenSegment';
 import {FirebasePrefix, FirebaseAuthToken} from './app/model/tokens';
 
-import {SimonGame} from './app/simon/SimonGame';
+import {SimonIotApp} from './app/simon-iot.component';
 
 const {Board} = require('johnny-five');
 const IO = require('raspi-io');
@@ -28,7 +28,7 @@ let board = new Board({
 
 board.on('ready', function () {
   console.log('Starting Simon game...');
-  bootstrap(SimonGame, [
+  bootstrap(SimonIotApp, [
     provide(AnalogSynth, { useClass: LinuxAnalogSynth }),
     provide(PLATFORM_DIRECTIVES, { useValue: SevenSegment, multi: true }),
     provide(FirebasePrefix, { useValue: '/iot' }),
