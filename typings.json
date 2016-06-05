@@ -1,9 +1,8 @@
 {
   "dependencies": {
-    "zone.js": "github:gdi2290/typed-zone.js#66ea8a3451542bb7798369306840e46be1d6ec89"
   },
   "devDependencies": {},
-  "ambientDependencies": {
+  "globalDependencies": {
     "angular-protractor": "github:DefinitelyTyped/DefinitelyTyped/angular-protractor/angular-protractor.d.ts#64b25f63f0ec821040a5d3e049a976865062ed9d",
     "core-js": "registry:dt/core-js#0.0.0+20160317120654",
     "firebase": "registry:dt/firebase#2.4.1+20160412125105",
