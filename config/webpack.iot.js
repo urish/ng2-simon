@@ -28,7 +28,7 @@ module.exports = webpackMerge(commonConfig, {
    *
    * See: http://webpack.github.io/docs/configuration.html#entry
    */
-  entry: './src/iot.ts',
+  entry: './src/main.iot.ts',
 
   /**
    * Options affecting the output of the compilation.
