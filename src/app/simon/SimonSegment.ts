@@ -39,16 +39,16 @@ export class SimonSegment {
   // button/LED colors and Raspberry Pi pins.
   // They are ignored in the web version of the game.
   private LEDS = {
-    green: 'GPIO6',
-    yellow: 'GPIO19',
-    red: 'GPIO12',
-    blue: 'GPIO20'
+    green: 'GPIO27',
+    yellow: 'GPIO23',
+    red: 'GPIO8',
+    blue: 'GPIO6'
   };
 
   private BUTTONS = {
-    green: 'GPIO13',
-    yellow: 'GPIO26',
-    red: 'GPIO16',
-    blue: 'GPIO21'
+    green: 'GPIO22',
+    yellow: 'GPIO24',
+    red: 'GPIO7',
+    blue: 'GPIO13'
   };
 }
