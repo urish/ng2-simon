@@ -4,6 +4,8 @@ A Universal Simon game written in Angular 2.
 
 It runs on the web browser, on Arduino and also on the Raspberry PI using [angular2-iot](https://github.com/urish/angular2-iot).
 
+➡ [Learn how to works and how you can build your own version](https://medium.com/@urish/building-simon-with-angular2-iot-fceb78bb18e5)
+
 ## Live Demo (browser)
 
 [Go to the online version](https://urish.github.io/ng2-simon/)
