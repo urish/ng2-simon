@@ -19,7 +19,11 @@ export class SevenSegment implements OnChanges {
   ngOnChanges() {
     if (this.value !== null) {
       const chars = this.value.toString().substr(0, 4).split('').map(letter => letter.charCodeAt(0));
-      this.io.i2cWrite(SEVEN_SEGMENT_ADDRESS, [0x76, ...chars]);
+      try {
+        this.io.i2cWrite(SEVEN_SEGMENT_ADDRESS, [0x76, ...chars]);
+      } catch (e) {
+        console.log('Error: I2C Write failed', e.toString());
+      }
     }
   }
 }
