@@ -1,0 +1,19 @@
+md-toolbar ul {
+  display: inline;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+md-toolbar li {
+  display: inline;
+}
+md-toolbar li.active {
+  background-color: lightgray;
+}
+md-toolbar .flex {
+  flex: 1 1 auto;
+}
+simon-game {
+  display: block;
+  margin-top: 40px;
+}

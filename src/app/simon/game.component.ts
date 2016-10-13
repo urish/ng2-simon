@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
-import {AnalogSynth} from '../AnalogSynth';
-import {SimonModelService} from '../model/SimonModelService';
+import { Component } from '@angular/core';
+import { SynthService } from '../shared/synth.service';
+import { SimonModelService } from '../model/simon-model.service';
 
 const SIMON_TONES = [
   192,  /* G3 */
@@ -9,9 +9,9 @@ const SIMON_TONES = [
   392   /* G4 */
 ];
 
-const MAX_TONE_DURATION: number = 300;
-const MIN_TONE_DURATION: number = 100;
-const TONE_DURATION_DELTA: number = 10;
+const MAX_TONE_DURATION = 300;
+const MIN_TONE_DURATION = 100;
+const TONE_DURATION_DELTA = 10;
 
 @Component({
   selector: 'simon-game',
@@ -52,7 +52,7 @@ const TONE_DURATION_DELTA: number = 10;
   `],
   providers: [SimonModelService]
 })
-export class SimonGame {
+export class SimonGameComponent {
   /**
    * Controls the states of each of the 4 buttons: on/off
    */
@@ -100,7 +100,7 @@ export class SimonGame {
    */
   private lastColor: string;
 
-  constructor(private synth: AnalogSynth, private simonModel: SimonModelService) {
+  constructor(private synth: SynthService, private simonModel: SimonModelService) {
   }
 
   startGame() {
@@ -191,7 +191,7 @@ export class SimonGame {
     });
   }
 
-  private updateModel(gameOver: boolean = false) {
+  private updateModel(gameOver = false) {
     this.simonModel.updateGame({
       score: this.score,
       playing: this.playing,

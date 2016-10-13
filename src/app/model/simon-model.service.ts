@@ -1,7 +1,23 @@
-import {Injectable, Inject, Optional} from '@angular/core';
-import {FirebasePrefix, FirebaseAuthToken} from './tokens';
+import { Injectable, Inject, Optional } from '@angular/core';
+import { FirebasePrefix, FirebaseAuthToken } from './tokens';
 
 import * as Firebase from 'firebase';
+
+export interface ISimonGameInfo {
+  playing: boolean;
+  score: number;
+  gameColor: string;
+  lastColor: string;
+  sequenceIndex: number;
+  gameOver: boolean;
+}
+
+export interface ISimonScoreInfo {
+  date?: any;
+  score: number;
+  color: string;
+  playingTime: number;
+}
 
 @Injectable()
 export class SimonModelService {
@@ -13,7 +29,7 @@ export class SimonModelService {
   constructor( @Inject(FirebasePrefix) prefix: string, @Inject(FirebaseAuthToken) @Optional() token: string) {
     this.fbRef = new Firebase('https://ngconf-simon.firebaseio.com').child(prefix);
     if (token) {
-      this.fbRef.authWithCustomToken(token, (err, authData) => {});
+      this.fbRef.authWithCustomToken(token, (err, authData) => { });
     }
   }
 

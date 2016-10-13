@@ -30,7 +30,7 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
   `
   ]
 })
-export class SimonSegment {
+export class SimonSegmentComponent {
   @Input() color: string;
   @Input() state: boolean = false;
   @Output() click = new EventEmitter();
@@ -38,14 +38,14 @@ export class SimonSegment {
   // The following two members define mapping between
   // button/LED colors and Raspberry Pi pins.
   // They are ignored in the web version of the game.
-  private LEDS = {
+  LEDS = {
     green: 'GPIO27',
     yellow: 'GPIO23',
     red: 'GPIO8',
     blue: 'GPIO6'
   };
 
-  private BUTTONS = {
+  BUTTONS = {
     green: 'GPIO22',
     yellow: 'GPIO24',
     red: 'GPIO7',

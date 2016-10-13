@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 
 @Component({
   selector: 'simon-blink',
@@ -8,7 +8,7 @@ import {Component, OnDestroy} from '@angular/core';
     </div>
   `
 })
-export class SimonBlink implements OnDestroy {
+export class BlinkComponent implements OnInit, OnDestroy {
   private visible: boolean = true;
   private timer: NodeJS.Timer;
 

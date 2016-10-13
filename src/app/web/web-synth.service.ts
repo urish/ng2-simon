@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {AnalogSynth} from '../AnalogSynth';
+import { Injectable } from '@angular/core';
+import { SynthService } from '../shared/synth.service';
 
 @Injectable()
-export class WebAnalogSynth extends AnalogSynth {
+export class WebSynthService extends SynthService {
   private context: AudioContext = null;
 
   constructor() {
