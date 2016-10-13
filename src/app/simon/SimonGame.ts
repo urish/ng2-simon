@@ -1,7 +1,4 @@
 import {Component} from '@angular/core';
-import {SimonSegment} from './SimonSegment';
-import {SimonScore} from './SimonScore';
-import {SimonBlink} from './SimonBlink';
 import {AnalogSynth} from '../AnalogSynth';
 import {SimonModelService} from '../model/SimonModelService';
 
@@ -53,7 +50,6 @@ const TONE_DURATION_DELTA: number = 10;
       font-family: monospace;
     }
   `],
-  directives: [SimonScore, SimonSegment, SimonBlink],
   providers: [SimonModelService]
 })
 export class SimonGame {

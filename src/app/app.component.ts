@@ -3,15 +3,12 @@
  */
 import {Component, ViewEncapsulation} from '@angular/core';
 
-import {SimonGame} from './simon/SimonGame';
-
 /*
  * App Component
  * Top Level Component
  */
 @Component({
-  selector: 'app',
-  directives: [SimonGame],
+  selector: 'app-root',
   encapsulation: ViewEncapsulation.None,
   styles: [`
     body {
@@ -62,5 +59,5 @@ import {SimonGame} from './simon/SimonGame';
     </footer>
   `
 })
-export class App {
+export class AppComponent {
 }

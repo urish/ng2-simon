@@ -1,22 +1,12 @@
-import 'angular2-universal/polyfills';
-import {bootstrap} from '@angular/platform-browser-dynamic';
-import {enableProdMode, provide, PLATFORM_DIRECTIVES} from '@angular/core';
+import './polyfills.ts';
 
-import {App, APP_PROVIDERS} from './app';
-import {MD_TOOLBAR_DIRECTIVES} from '@angular2-material/toolbar';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { enableProdMode } from '@angular/core';
+import { environment } from './environments/environment';
+import { AppModule, APP_PROVIDERS } from './app/';
 
-if ('production' === ENV) {
+if (environment.production) {
   enableProdMode();
 }
 
-export function main(initialHmrState?: any): Promise<any> {
-
-  return bootstrap(App, [
-    provide(PLATFORM_DIRECTIVES, { useValue: MD_TOOLBAR_DIRECTIVES, multi: true }),
-    ...APP_PROVIDERS
-  ])
-    .catch(err => console.error(err));
-
-}
-
-document.addEventListener('DOMContentLoaded', () => main());
+platformBrowserDynamic(APP_PROVIDERS).bootstrapModule(AppModule);
