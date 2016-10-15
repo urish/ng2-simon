@@ -12,8 +12,9 @@
     "test": "ng test",
     "pree2e": "webdriver-manager update",
     "e2e": "protractor",
+    "build": "ng build -prod -bh /ng2-simon/",
+    "build:iot": "ng set apps[0].main main.iot.ts && ng build -prod -bh /ng2-simon/",
     "watch:iot": "npm run build:iot -- --watch",
-    "build:iot": "webpack --config config/webpack.iot.js  --progress --profile --colors --display-error-details --display-cached --bail",
     "iot": "nodemon dist/iot.bundle.js",
     "deploy": "gh-pages -d dist"
   },
@@ -29,8 +30,13 @@
     "@angular/platform-browser-dynamic": "~2.0.0",
     "@angular/router": "~3.0.0",
     "@types/firebase": "2.4.30",
+    "angular2-iot": "0.1.1",
+    "angular2-universal": "2.1.0-rc.1",
+    "angular2-universal-polyfills": "2.1.0-rc.1",
     "core-js": "^2.4.1",
     "firebase": "2.4.2",
+    "firebase-token-generator": "2.0.0",
+    "johnny-five": "0.10.1",
     "rxjs": "5.0.0-beta.12",
     "ts-helpers": "^1.1.1",
     "zone.js": "^0.6.23"
@@ -51,5 +57,8 @@
     "ts-node": "1.2.1",
     "tslint": "3.13.0",
     "typescript": "2.0.2"
+  },
+  "optionalDependencies": {
+    "raspi-io": "6.1.0"
   }
 }

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { SevenSegmentComponent } from './seven-segment.component.ts';
+import { SevenSegmentComponent } from './seven-segment.component';
 import { IotModule } from 'angular2-iot';
 
 @NgModule({
@@ -13,4 +13,4 @@ import { IotModule } from 'angular2-iot';
     SevenSegmentComponent
   ]
 })
-export class IotModule { }
+export class SimonIotModule { }
