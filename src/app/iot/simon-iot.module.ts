@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { SevenSegmentComponent } from './seven-segment.component';
 import { IotModule } from 'angular2-iot';
+import { AppModule } from '../app.module';
 
 @NgModule({
   imports: [
-    IotModule
+    IotModule,
+    AppModule
   ],
   declarations: [
     SevenSegmentComponent
