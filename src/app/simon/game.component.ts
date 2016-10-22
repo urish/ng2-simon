@@ -56,7 +56,7 @@ export class SimonGameComponent {
   /**
    * Controls the states of each of the 4 buttons: on/off
    */
-  private ledStates = [false, false, false, false];
+  ledStates = [false, false, false, false];
 
   /**
    * The sequence that the user has to repeat. Grows by one element
@@ -77,12 +77,12 @@ export class SimonGameComponent {
   /**
    * Indicates whether the game is currently active
    */
-  private playing: boolean = false;
+  playing: boolean = false;
 
   /**
    * Current score of the player
    */
-  private score: number = 0;
+  score: number = 0;
 
   /**
    * Keeps track of the time when the game started
