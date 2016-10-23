@@ -3,10 +3,8 @@ import 'angular2-universal-polyfills';
 import { bootstrap } from 'angular2-iot';
 const FirebaseTokenGenerator = require('firebase-token-generator');
 
-import { SynthService } from './app/shared/synth.service';
-import { LinuxSynthService } from './app/iot/linux-synth.service';
 import { FirebasePrefix, FirebaseAuthToken } from './app/model/tokens';
-import { SimonIotModule } from './app/iot/simon-iot.module';
+import { SimonIotModule } from './app/simon-iot.module';
 
 const {Board} = require('johnny-five');
 const IO = require('raspi-io');
@@ -25,7 +23,6 @@ let board = new Board({
 board.on('ready', function () {
   console.log('Starting Simon game...');
   bootstrap(SimonIotModule, [
-    { provide: SynthService, useValue: LinuxSynthService },
     { provide: FirebasePrefix, useValue: '/iot' },
     { provide: FirebaseAuthToken, useValue: firebaseToken }
   ]);

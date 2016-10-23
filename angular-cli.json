@@ -10,6 +10,7 @@
       "assets": "assets",
       "index": "index.html",
       "main": "main.browser.ts",
+      "iotMain": "main.iot.ts",
       "test": "test.ts",
       "tsconfig": "tsconfig.json",
       "prefix": "app",
