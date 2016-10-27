@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SynthService } from '../shared/synth.service';
 import { SimonModelService } from '../model/simon-model.service';
 
@@ -52,7 +52,7 @@ const TONE_DURATION_DELTA = 10;
   `],
   providers: [SimonModelService]
 })
-export class SimonGameComponent {
+export class SimonGameComponent implements OnInit, OnDestroy {
   /**
    * Controls the states of each of the 4 buttons: on/off
    */
@@ -100,7 +100,31 @@ export class SimonGameComponent {
    */
   private lastColor: string;
 
+  /**
+   * Stores the time of the last move. We use this to implement the game timeout.
+   */
+  private lastMoveTime: Date;
+
+  /**
+   * The timer that handles game timeout
+   */
+  private gameTimeoutTimer: NodeJS.Timer;
+
   constructor(private synth: SynthService, private simonModel: SimonModelService) {
+  }
+
+  ngOnInit() {
+    /* Set up the game timeout check */
+    this.gameTimeoutTimer = setInterval(() => {
+      if (this.playing && new Date().getTime() - this.lastMoveTime.getTime() >= 20000) {
+        this.playing = false;
+        this.gameOver();
+      }
+    }, 1000);
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.gameTimeoutTimer);
   }
 
   startGame() {
@@ -137,10 +161,12 @@ export class SimonGameComponent {
     } else {
       this.playerTurn = true;
       this.sequenceIndex = 0;
+      this.lastMoveTime = new Date();
     }
   }
 
   button(idx: number, color: string) {
+    this.lastMoveTime = new Date();
     if (!this.playing) {
       this.playing = true;
       this.gameColor = color;
