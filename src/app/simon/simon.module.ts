@@ -3,7 +3,7 @@ import { BlinkComponent } from './blink.component';
 import { SimonGameComponent } from './game.component';
 import { SimonScoreComponent } from './score.component';
 import { SimonSegmentComponent } from './segment.component';
-import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -12,7 +12,7 @@ import { BrowserModule } from '@angular/platform-browser';
     SimonScoreComponent,
     SimonSegmentComponent
   ],
-  imports: [BrowserModule],
+  imports: [CommonModule],
   exports: [SimonGameComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
