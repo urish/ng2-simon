@@ -6,6 +6,7 @@ import { SimonModule } from './simon';
 import { SimonGameComponent } from './simon/game.component';
 import { SynthService } from './shared/synth.service';
 import { LinuxSynthService } from './iot/linux-synth.service';
+import { SimonIotComponent } from './simon-iot.component';
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import { LinuxSynthService } from './iot/linux-synth.service';
     SimonModule
   ],
   declarations: [
+    SimonIotComponent,
     SevenSegmentComponent
   ],
   providers: [
@@ -22,7 +24,7 @@ import { LinuxSynthService } from './iot/linux-synth.service';
     SevenSegmentComponent
   ],
   bootstrap: [
-    SimonGameComponent
+    SimonIotComponent
   ]
 })
 export class SimonIotModule { }
