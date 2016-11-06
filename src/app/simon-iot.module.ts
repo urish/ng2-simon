@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { SevenSegmentComponent } from './iot/seven-segment.component';
 import { IotModule } from 'angular2-iot';
 
 import { SimonModule } from './simon';
@@ -14,14 +13,10 @@ import { SimonIotComponent } from './simon-iot.component';
     SimonModule
   ],
   declarations: [
-    SimonIotComponent,
-    SevenSegmentComponent
+    SimonIotComponent
   ],
   providers: [
     { provide: SynthService, useClass: LinuxSynthService }
-  ],
-  exports: [
-    SevenSegmentComponent
   ],
   bootstrap: [
     SimonIotComponent
