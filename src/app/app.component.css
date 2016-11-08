@@ -1,18 +1,18 @@
-md-toolbar ul {
-  display: inline;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+header {
+  display: block;
+  background: #3f51b5;
+  color: white;
+  display: flex;
+  padding: 0 16px;
+  height: 64px;
+  align-items: center;
+  font-size: 20px;
 }
-md-toolbar li {
-  display: inline;
+
+.flex {
+  flex: 1;
 }
-md-toolbar li.active {
-  background-color: lightgray;
-}
-md-toolbar .flex {
-  flex: 1 1 auto;
-}
+
 simon-game {
   display: block;
   margin-top: 40px;

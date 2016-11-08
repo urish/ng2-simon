@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { MaterialModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { SimonModule } from './simon';
@@ -11,8 +10,7 @@ import { SimonModule } from './simon';
   ],
   imports: [
     BrowserModule,
-    SimonModule,
-    MaterialModule
+    SimonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
