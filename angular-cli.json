@@ -22,7 +22,8 @@
       "environments": {
         "source": "environments/environment.ts",
         "dev": "environments/environment.ts",
-        "prod": "environments/environment.prod.ts"
+        "prod": "environments/environment.prod.ts",
+        "iot": "environments/environment.iot.ts"
       }
     }
   ],

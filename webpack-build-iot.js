@@ -89,4 +89,4 @@ function getWebpackNodeConfig(projectRoot, environment, appConfig) {
 }
 
 var appConfig = require('./angular-cli.json').apps[0];
-module.exports = getWebpackNodeConfig('.', 'prod', appConfig);
+module.exports = getWebpackNodeConfig('.', 'iot', appConfig);

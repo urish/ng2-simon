@@ -4,6 +4,7 @@ import { SimonGameComponent } from './game.component';
 import { SimonScoreComponent } from './score.component';
 import { SimonSegmentComponent } from './segment.component';
 import { CommonModule } from '@angular/common';
+import { environment } from '../../environments/environment';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,7 @@ import { CommonModule } from '@angular/common';
     SimonScoreComponent,
     SimonSegmentComponent
   ],
-  imports: [CommonModule],
+  imports: [CommonModule, ...environment.iotModules],
   exports: [SimonGameComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
