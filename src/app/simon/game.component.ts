@@ -121,6 +121,20 @@ export class SimonGameComponent implements OnInit, OnDestroy {
         this.gameOver();
       }
     }, 1000);
+
+    /* Flash the LEDs */
+    const lights = [0, 2, 1, 3, 1, 2, 0];
+    let delay = 0;
+    for (let light of lights) {
+      setTimeout(() => {
+        this.ledStates = [false, false, false, false];
+        this.ledStates[light] = true;
+      }, delay);
+      delay += 150;
+    }
+    setTimeout(() => {
+      this.ledStates = [false, false, false, false];
+    }, delay);
   }
 
   ngOnDestroy() {
